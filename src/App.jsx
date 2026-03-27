@@ -5,7 +5,7 @@ import Layout from './Components/Layouts/Layout';
 import Guard from './Guard';
 import LogIn from './Pages/Auth/LogIn';
 import Register from './Pages/Auth/Register';
-import Massages from './Pages/Chatting/ChatHome/massages';
+import Massages from './Pages/Chatting/Massages';
 import Home from './Pages/Home/Home';
 import Notifications from './Pages/Notifications/Notifications';
 import PostDetails from './Pages/Post/PostDetails';

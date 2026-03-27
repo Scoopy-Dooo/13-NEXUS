@@ -16,7 +16,7 @@ export default function NavBar() {
   const links = [
     { name: "home", icon: <FiHome /> },
     { name: "notifications", icon: <FiBell /> },
-    { name: "massages", icon: <IoChatbubbleOutline /> },
+    { name: "Massages", icon: <IoChatbubbleOutline /> },
     { name: "profile", icon: <FiUser /> },
     { name: "settings", icon: <GoGear /> },
   ]
