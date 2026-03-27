@@ -1,0 +1,45 @@
+@import "tailwindcss";
+@plugin '../hero.ts';
+/* Note: You may need to change the path to fit your project structure */
+@source '../node_modules/@heroui/theme/dist*.{js,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-main: #020618;
+  --myAnimate-animate: {
+    0% {
+      transform: translateY(-300%);
+    }
+    50% {
+      transform: translateY(0%);
+    }
+    75% {
+      transform: translateY(-200%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  };
+}
+@layer base {
+  ::selection {
+    @apply bg-pink-600 text-white;
+  }
+}
+@layer components {
+  .input-fields {
+    @apply relative block py-1 ps-1 mt-1 w-full border border-slate-700 rounded-lg transition-all duration-500;
+  }
+  .postCard {
+    @apply hover:shadow-[0px_0px_10px_0px] overflow-hidden shadow-indigo-900 pt-4 bg-slate-900/50 rounded-xl transition-all duration-100;
+  }
+  .modalIcons {
+    @apply rounded-full p-2 cursor-pointer text-2xl transition-all hover:scale-105 duration-100;
+  }
+  .post-footer-icon {
+    @apply flex items-center gap-1 active:scale-105 cursor-pointer rounded-xl p-2 hover:bg-slate-800 transition-all duration-300;
+  }
+  .post-actions-menu {
+    @apply rounded-lg active:scale-90 hover:translate-1 hover:bg-slate-900 transition-all duration-200;
+  }
+}
