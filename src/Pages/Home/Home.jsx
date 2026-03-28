@@ -23,10 +23,13 @@ export default function Home() {
     queryKey: ['posts'],
     queryFn: () => GetAllPosts(token),
     refetchOnMount: true,
-    staleTime: 1000 * 60, // 1 minute
-    gcTimeout: 1000 * 60 * 10, // 10 minutes
-    refetchInterval: 1000 * 60 * 2, // 2 minutes 
+    staleTime: 0,
+    gcTime: 1000 * 60 * 10,
+    refetchInterval: 1000 * 60 * 2,
   })
+
+
+
   const posts = data?.data?.posts
 
   return <>

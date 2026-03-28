@@ -40,6 +40,6 @@
     @apply flex items-center gap-1 active:scale-105 cursor-pointer rounded-xl p-2 hover:bg-slate-800 transition-all duration-300;
   }
   .post-actions-menu {
-    @apply rounded-lg active:scale-90 hover:translate-1 hover:bg-slate-900 transition-all duration-200;
+    @apply rounded-lg active:scale-90 hover:translate-1 hover:bg-slate-700 transition-all duration-200;
   }
 }

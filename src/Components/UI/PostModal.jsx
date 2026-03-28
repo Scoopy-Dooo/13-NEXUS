@@ -7,6 +7,7 @@ import sendPost from "../../Services/SendPostApi";
 import { AuthContext } from './../../Contexts/AuthContext';
 import ProfileImg from './ProfileImg';
 import { toast } from "react-toastify";
+import { useQueryClient } from "@tanstack/react-query";
 
 const myEmojis = ['😀', '😂', '❤️', '😭', '💚', '⭕', '👍', '🎉', '🔥', '👏', '✨', '😍', '🤔', '😎', '💯', '🚀', '📸', '🎵'];
 
@@ -14,6 +15,7 @@ const myEmojis = ['😀', '😂', '❤️', '😭', '💚', '⭕', '👍', '🎉
 export default function PostModal({ userData }) {
 
     const { token } = useContext(AuthContext)
+    const queryClient = useQueryClient();
     const [imageUrl, setImageUrl] = useState(null);
     const contentRef = useRef(null);
     const imageRef = useRef(null);
@@ -52,6 +54,7 @@ export default function PostModal({ userData }) {
         const res = await sendPost(data, token);
 
         notify(res?.message || "Post created successfully!");
+        queryClient.invalidateQueries({ queryKey: ['posts'] });
 
         // reset all values
         if (contentRef.current) contentRef.current.value = '';

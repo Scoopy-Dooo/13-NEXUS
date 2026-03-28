@@ -5,7 +5,45 @@ import { Link } from "react-router";
 import ProfileImg from './ProfileImg';
 import { IoCopyOutline } from "react-icons/io5";
 import { MdOutlineBookmarkAdded, MdOutlineBookmarkRemove } from "react-icons/md";
+import { useContext, useState } from "react";
+import { AuthContext } from './../../Contexts/AuthContext';
+import { UserContext } from './../../Contexts/UserContext';
+import { deletePost } from "../../Services/DeletePost";
+import { BookmarkPost } from "../../Services/BookmarkPost";
+import { toast } from "react-toastify";
+import { useQueryClient } from "@tanstack/react-query";
 export default function PostHeader({ post }) {
+
+    const { token } = useContext(AuthContext);
+    const { userData } = useContext(UserContext);
+    const [isSaved, setIsSaved] = useState(post?.bookmarked);
+    const queryClient = useQueryClient();
+
+    const isMyPost = userData?._id === post?.user?._id;
+
+    const notify = (message) => toast(message);
+    async function handleSavePost() {
+        const data = await BookmarkPost(post._id, token)
+        setIsSaved(data?.bookmarked)
+        notify(data?.bookmarked ? "Post saved successfully" : "Post removed from saved posts")
+        queryClient.invalidateQueries({ queryKey: ['posts'] });
+    }
+
+    async function handleCopyPost() {
+        const copiedText = await navigator.clipboard.writeText(post?.body || '');
+        console.log("🚀 ~ handleCopyPost ~ copiedText:", copiedText)
+        notify("Post content copied to clipboard ✔️")
+    }
+    function handleEditPost() {
+
+    }
+    async function handleDeletePost() {
+        const data = await deletePost(post._id, token)
+        console.log("🚀 ~ handleDeletePost ~ data:", data)
+        notify("Post deleted successfully");
+        queryClient.invalidateQueries({ queryKey: ['posts'] });
+    }
+
     const formatDate = (dateString) => {
         return new Date(dateString).toLocaleDateString('en-US', {
             year: 'numeric',
@@ -17,7 +55,8 @@ export default function PostHeader({ post }) {
             hour12: false,
         });
     }
-    // console.log('post from post header : ', post?.user);
+
+
     return <div className=' flex px-4 items-center justify-between w-full'>
         <div className="flex items-center justify-start gap-2 w-full">
             <ProfileImg user={post?.user} />
@@ -30,21 +69,19 @@ export default function PostHeader({ post }) {
                 </p>
             </div>
         </div>
-        <div className="">
-
-            <Dropdown className="text-slate-400">
-                <DropdownTrigger>
-                    <Button className="text-lg hover:text-white hover:bg-slate-800 transition-all rounded-full">
-                        <HiDotsHorizontal /></Button>
-                </DropdownTrigger>
-                <DropdownMenu className="flex flex-col gap-3" aria-label="Static Actions">
-                    <DropdownItem className=" text-emerald-600 hover:text-emerald-500  post-actions-menu " key="save"><p className="w-full items-center flex gap-1 "><MdOutlineBookmarkRemove /><MdOutlineBookmarkAdded />Save</p></DropdownItem>
-                    <DropdownItem className=" text-sky-600	hover:text-sky-500  post-actions-menu " key="copy"><p className="w-full items-center flex gap-1 "><IoCopyOutline />Copy</p></DropdownItem>
-                    <DropdownItem className=" text-amber-600 hover:text-amber-500  post-actions-menu " key="edit"><p className="w-full items-center flex gap-1 "><FaPen />Edit</p></DropdownItem>
-                    <DropdownItem className=" text-rose-600	hover:text-rose-500  post-actions-menu " key="delete"><p className="w-full items-center flex gap-1 "><FaRegTrashAlt />Delete</p></DropdownItem>
-                </DropdownMenu>
-            </Dropdown>
-
-        </div>
+        <Dropdown className="text-slate-400">
+            <DropdownTrigger>
+                <Button className="text-lg hover:text-white hover:bg-slate-800 transition-all rounded-full">
+                    <HiDotsHorizontal /></Button>
+            </DropdownTrigger>
+            <DropdownMenu className="backdrop-blur-2xl bg-slate-950/50 rounded-2xl shadow-2xl flex flex-col gap-3" aria-label="Static Actions">
+                <DropdownItem className=" text-emerald-600 hover:text-emerald-500  post-actions-menu " key="save"><button onClick={handleSavePost} className="w-full items-center flex gap-1 "> {isSaved ? <><MdOutlineBookmarkRemove /> Unsave</> : <><MdOutlineBookmarkAdded /> Save</>}   </button></DropdownItem>
+                <DropdownItem className=" text-sky-600	hover:text-sky-500  post-actions-menu " key="copy"><button onClick={handleCopyPost} className="w-full items-center flex gap-1 "><IoCopyOutline />Copy</button></DropdownItem>
+                {isMyPost && <>
+                    <DropdownItem className=" text-amber-600 hover:text-amber-500  post-actions-menu " key="edit"><button onClick={handleEditPost} className="w-full items-center flex gap-1 "><FaPen />Edit</button></DropdownItem>
+                    <DropdownItem className=" text-rose-600	hover:text-rose-500  post-actions-menu " key="delete"><button onClick={handleDeletePost} className="w-full items-center flex gap-1 "><FaRegTrashAlt />Delete</button></DropdownItem>
+                </>}
+            </DropdownMenu>
+        </Dropdown>
     </div>
 }

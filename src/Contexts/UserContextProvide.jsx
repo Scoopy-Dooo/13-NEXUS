@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react'
 import { UserContext } from './UserContext'
 
-const storedUserData = localStorage.getItem('userData')
-
-
 export default function UserContextProvide({ children }) {
-  const [userData, setUserData] = useState(storedUserData ? JSON.parse(storedUserData) : null)
+  const [userData, setUserData] = useState(() => {
+    try {
+      const stored = localStorage.getItem('userData')
+      return stored ? JSON.parse(stored) : null
+    } catch {
+      return null
+    }
+  })
 
 
 
