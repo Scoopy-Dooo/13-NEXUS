@@ -10,7 +10,7 @@ import { IoMdMale } from 'react-icons/io';
 import { LuCalendarDays } from 'react-icons/lu';
 import { TbLockCheck } from 'react-icons/tb';
 import { Link, useNavigate } from 'react-router';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import * as z from "zod";
 // **
 import logo from "../../assets/logo2 cut.png";
@@ -29,10 +29,13 @@ const schema = z.object({
   path: ["rePassword", "password"],
 }).required();
 // !!!!!!!!!!!!!!!!!!===============================================
+
+
+
 export default function Register() {
   const [isLoading, setIsLoading] = useState(false)
   const nav = useNavigate()
-  // watch,
+
   const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       name: "",
@@ -53,14 +56,13 @@ export default function Register() {
 
   async function onSubmit(userData) {
     setIsLoading(true)
-    const body = JSON.stringify(userData)
 
     try {
       const { data } = await axios(`${baseUrl}/users/signup`, {
         headers: {
           'Content-Type': 'application/json'
         }, method: 'POST',
-        data: body,
+        data: userData,
       })
 
       nav("/login")
@@ -130,7 +132,7 @@ export default function Register() {
             <div className='mb-3'>
               <label className='' htmlFor="password">Password</label>
               <div className='relative w-full'>
-                <input {...register("password")} id='password' className='peer outline-indigo-800 focus:outline-2 w-full ps-8 input-fields' type="text" placeholder='Enter Your Password' />
+                <input {...register("password")} id='password' className='peer outline-indigo-800 focus:outline-2 w-full ps-8 input-fields' type="password" autoComplete="new-password" placeholder='Enter Your Password' />
                 <span className='peer-focus:text-indigo-400 absolute top-0 bottom-0 left-2 text-lg flex items-center'><FaLock /></span>
                 <InputError message={errors.password?.message} />
               </div>
@@ -139,7 +141,7 @@ export default function Register() {
             <div className='mb-3'>
               <label className='' htmlFor="rePassword">Confirm Password</label>
               <div className='relative w-full'>
-                <input {...register("rePassword")} id='rePassword' className='peer outline-indigo-800 focus:outline-2 w-full ps-8 input-fields' type="text" placeholder='Confirm Your Password' />
+                <input {...register("rePassword")} id='rePassword' className='peer outline-indigo-800 focus:outline-2 w-full ps-8 input-fields' type="password" autoComplete="new-password" placeholder='Confirm Your Password' />
                 <span className='peer-focus:text-indigo-400   absolute top-0 bottom-0 left-2 text-lg flex items-center'><TbLockCheck /></span>
                 <InputError message={errors.rePassword?.message} />
               </div>
@@ -172,8 +174,10 @@ export default function Register() {
               and
               <Link className='text-indigo-600 hover:text-indigo-300' to={"/register"}>Privacy Policy</Link>
             </p>
-            <Button type='submit' className='shadow-indigo-800 shadow-[0px_2px_10px_0.5px] rounded-lg w-full py-2 my-3 bg-linear-to-r from-indigo-600 to-pink-600 flex items-center justify-center cursor-pointer group'><span>{isLoading ? "Creating Account........" : "Create Account"}</span><span><FaArrowRight className='translate-y-0.5 ms-1 group-hover:translate-x-1 transition text-sm' /></span></Button>
-            <ToastContainer />
+            <Button isLoading={isLoading} type='submit' className='shadow-indigo-800 shadow-[0px_2px_10px_0.5px] rounded-lg w-full py-2 my-3 bg-linear-to-r from-indigo-600 to-pink-600 flex items-center justify-center cursor-pointer group'>
+              <span>Create Account</span>
+              <span><FaArrowRight className='translate-y-0.5 ms-1 group-hover:translate-x-1 transition text-sm' /></span>
+            </Button>
           </form>
           <div className='py-2 border-t border-slate-700 text-center'>
 

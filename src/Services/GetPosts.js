@@ -9,7 +9,6 @@ export default async function GetAllPosts(token) {
         token: token,
       },
     });
-    // console.log("data inside func : ", data);
     return await data;
   } catch (error) {
     console.log("error from get all post service : ", error);

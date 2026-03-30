@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router';
 import { ToastContainer } from 'react-toastify';
 import Layout from './Components/Layouts/Layout';
 import Guard from './Guard';
+import EditProfile from './Pages/Profile/EditProfile';
 
 const LogIn = lazy(() => import('./Pages/Auth/LogIn'));
 const Register = lazy(() => import('./Pages/Auth/Register'));
@@ -24,7 +25,11 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Guard><Home /></Guard> },
       { path: "/home", element: <Guard><Home /></Guard> },
-      { path: "/profile/:userId", element: <Guard><Profile /></Guard> },
+      {
+        path: "/profile/:userId", element: <Guard><Profile /></Guard>, children: [
+          { path: "/profile/:userId/editprofile", element: <Guard><EditProfile /></Guard> },
+        ]
+      },
       { path: "/post/:id", element: <Guard><PostDetails /></Guard> },
       { path: "/settings", element: <Guard><Settings /></Guard> },
       { path: "/massages", element: <Guard><Massages /></Guard> },
@@ -38,8 +43,8 @@ const router = createBrowserRouter([
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className='relative z-100'><ToastContainer autoClose={2500} /></div>
-      <div className='min-h-screen bg-slate-950 text-slate-500'>
+      <div className='absolute w-fit z-100'><ToastContainer autoClose={2500} /></div>
+      <div className='min-h-screen  bg-slate-950 text-slate-500'>
         <Suspense fallback={<div className="min-h-screen bg-slate-950" />}>
           <RouterProvider router={router} />
         </Suspense>

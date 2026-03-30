@@ -15,7 +15,7 @@ export async function getMyProfileApi(token) {
 
     return await data?.data?.user;
   } catch (error) {
-    return error;
+    return null;
   }
 }
 export async function getProfileApi(userId, token) {
@@ -34,6 +34,6 @@ export async function getProfileApi(userId, token) {
     return await data?.data;
 
   } catch (error) {
-    return error;
+    return null;
   }
 }

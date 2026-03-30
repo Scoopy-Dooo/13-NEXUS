@@ -2,12 +2,12 @@ import { Button } from "@heroui/react";
 import { useContext, useRef, useState } from 'react';
 import { CiFaceSmile, CiImageOn } from "react-icons/ci";
 import { FiMapPin } from "react-icons/fi";
-import { IoMdClose } from "react-icons/io";
+import { IoIosCloseCircleOutline, IoMdClose } from "react-icons/io";
 import sendPost from "../../Services/SendPostApi";
-import { AuthContext } from './../../Contexts/AuthContext';
-import ProfileImg from './ProfileImg';
+import { AuthContext } from '../../Contexts/AuthContext';
+import ProfileImg from '../../Components/UI/ProfileImg';
 import { toast } from "react-toastify";
-import { useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const myEmojis = ['😀', '😂', '❤️', '😭', '💚', '⭕', '👍', '🎉', '🔥', '👏', '✨', '😍', '🤔', '😎', '💯', '🚀', '📸', '🎵'];
 
@@ -21,8 +21,22 @@ export default function PostModal({ userData }) {
     const imageRef = useRef(null);
     const [error, setError] = useState('');
     const [isOpen, setIsOpen] = useState(false);
-    const notify = (massages) => toast(massages);
     const [showEmoji, setShowEmoji] = useState(false);
+
+    const { mutate: submitPost, isPending } = useMutation({
+        mutationFn: (data) => sendPost(data, token),
+        onSuccess: (res) => {
+            toast(res?.message || "Post created successfully!");
+            queryClient.invalidateQueries({ queryKey: ['posts'] });
+            if (contentRef.current) contentRef.current.value = '';
+            if (imageRef.current) imageRef.current.value = '';
+            setImageUrl(null);
+            setIsOpen(false);
+        },
+        onError: () => {
+            toast.error("Failed to create post, please try again.");
+        },
+    });
 
     const handleEmojiClick = (emoji) => {
         const textarea = contentRef.current;
@@ -33,34 +47,16 @@ export default function PostModal({ userData }) {
         setShowEmoji(false)
     };
 
-    async function handleSendPost() {
+    function handleSendPost() {
         const image = imageRef.current?.files?.[0] || null;
         const content = contentRef.current?.value.trim() || '';
 
-        // Require at least one of text or image
         if (!content && !image) {
             setError('Please enter text or select an image before posting.');
             return;
         }
         setError('');
-
-
-        // this data will send to API
-        const data = {
-            text: content,
-            image: image,
-        }
-        // api calls here to send post data to backend
-        const res = await sendPost(data, token);
-
-        notify(res?.message || "Post created successfully!");
-        queryClient.invalidateQueries({ queryKey: ['posts'] });
-
-        // reset all values
-        if (contentRef.current) contentRef.current.value = '';
-        if (imageRef.current) imageRef.current.value = '';
-        setImageUrl(null);
-        setIsOpen(false);
+        submitPost({ text: content, image });
     }
 
     function handlecloseModal() {
@@ -84,8 +80,15 @@ export default function PostModal({ userData }) {
         setIsOpen(true);
     }
 
+    function handleClearImage() {
+        if (imageRef.current) {
+            imageRef.current.value = '';
+            setImageUrl(null);
+        }
+    }
+
     return <>
-        <Button className="w-full relative pe-0 " onPress={openModal} type="button">
+        <Button className="w-full relative bg-transparent text-slate-200  pe-0 " onPress={openModal} type="button">
             <div className='text-start cursor-pointer  peer rounded-xl bg-slate-900 focus:bg-slate-800/50 hover:bg-slate-800 border-0 p-3   w-full  transition-all'>
                 Whats on your mind, {userData?.name ?? "User"}?</div>
             <span className='peer-focus:text-indigo-400 absolute top-0 bottom-0 right-10 text-lg flex items-center modalIcons modalIcons  font-bold text-pink-500'>  <CiImageOn /></span>
@@ -109,7 +112,10 @@ export default function PostModal({ userData }) {
                         </div>
 
                         {imageUrl &&
-                            <div className=" overflow-hidden rounded-lg w-fit m-auto">
+                            <div className=" overflow-hidden relative rounded-lg w-fit m-auto">
+                                <Button className="absolute top-2 right-2" color="danger" variant="flat" onPress={handleClearImage} >
+                                    <IoIosCloseCircleOutline className="text-2xl " />
+                                </Button>
                                 <img className=" overflow-hidden h-80 w-full object-contain" src={imageUrl} alt="preview" />
                             </div>
                         }
@@ -138,8 +144,8 @@ export default function PostModal({ userData }) {
                                 <span className="modalIcons hover:bg-emerald-800 hover:text-emerald-300 text-emerald-400"><FiMapPin /></span>
                             </div>
 
-                            <button onClick={handleSendPost} type="button" className="px-3 py-2 bg-indigo-600 hover:bg-indigo-800 rounded-lg transition-all cursor-pointer">
-                                Post
+                            <button onClick={handleSendPost} disabled={isPending} type="button" className="px-3 py-2 bg-indigo-600 hover:bg-indigo-800 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-all cursor-pointer">
+                                {isPending ? 'Posting...' : 'Post'}
                             </button>
                         </div>
                     </div>
