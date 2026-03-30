@@ -30,7 +30,7 @@ export default function Home() {
     <div className='main text-white text-center '>
       <HomeHeader />
 
-      <div className="home relative overflow-hidden p-4">
+      <div className="home relative overflow-hidden p-1 md:p-4">
         {/* <section id='homeAsideProfile' className=""></section> */}
 
 

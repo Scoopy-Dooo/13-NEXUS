@@ -16,7 +16,6 @@ import CommentCard from '../../Components/UI/CommentCard';
 export default function PostDetails() {
   const { token } = useContext(AuthContext)
   const { id } = useParams();
-  console.log('id from post details  : ', id);
 
   const { data: post } = useQuery({
     queryKey: ['post', id],

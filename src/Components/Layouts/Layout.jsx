@@ -32,10 +32,11 @@ export default function Layout() {
     return <>
         <title>NEXUS | {pageTitle}</title>
         {token ? <>
-            <div className='w-full grid grid-cols-6 lg:grid-cols-8 min-h-screen '>
-                <div className='col-span-1 lg:col-span-2'><NavBar /></div>
-                <div className='col-span-5 lg:col-span-6 pb-8'><Outlet /></div>
+            <div className='w-full min-h-screen md:grid md:grid-cols-6 lg:grid-cols-8'>
+                <div className='hidden md:block md:col-span-1 lg:col-span-2'><NavBar /></div>
+                <div className='col-span-full md:col-span-5 lg:col-span-6 pb-20 md:pb-8'><Outlet /></div>
             </div>
+            <NavBar mobile />
             <Footer />
         </> : <>
             <div className=''>

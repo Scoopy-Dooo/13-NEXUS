@@ -31,26 +31,29 @@ export default function PostFooter({ post, isCommenting }) {
 
     async function handleSendComment() {
         const content = commentInput.current.value.trim()
-        if (!content) return;
+        if (!content) { toast.error("Comment can't be empty"); return; }
+        if (content.length > 500) { toast.error("Comment can't exceed 500 characters"); return; }
         mutate(content)
         commentInput.current.value = ""
     }
 
-    return <div className='px-4 hover:bg-slate-800/50 cursor-pointer transition-all rounded-b-xl border-t py-5 border-slate-800 w-full'>
+    return <div className='px-1 md:px-4 hover:bg-slate-800/50 cursor-pointer transition-all rounded-b-xl border-t py-2 md:py-5 border-slate-800 w-full'>
 
 
         {post?.topComment && <CommentCard comment={post.topComment} />}
 
-        {post?.commentsCount > 1 && (
+        {post?.commentsCount > 1 ? (
             <Link to={`/post/${post?._id}`} className="hover:text-cyan-300 hover:translate-0.5 transition-all text-cyan-400 text-sm">View all {post?.commentsCount} comments</Link>
-        )}
+        ) :
+            <p className='max-md:text-xs'>No comments yet</p>
+        }
 
 
         {isCommenting &&
             <div className='comment flex items-center justify-start gap-3 mt-3'>
                 <ProfileImg user={userData} size="size-10! " />
                 <div className="w-full relative ">
-                    <textarea name="comment" rows={3} ref={commentInput} type="text" className="resize-none peer bg-slate-900 focus:bg-slate-800 outline-indigo-800 focus:outline-2 input-fields" placeholder="Write a comment..." />
+                    <textarea name="comment" rows={3} ref={commentInput} maxLength={500} className="resize-none peer bg-slate-900 focus:bg-slate-800 outline-indigo-800 focus:outline-2 input-fields" placeholder="Write a comment..." />
                     <Button onPress={handleSendComment} className="absolute bg-slate-300 text-indigo-500 hover:bg-slate-200 text-lg inset-e-2 min-w-0 bottom-1/2 translate-y-1/2 " isLoading={isPending}><BsSendFill /></Button>
                 </div>
             </div>

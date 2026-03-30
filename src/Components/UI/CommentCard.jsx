@@ -47,10 +47,11 @@ export default function CommentCard({ comment }) {
 
     function handleEditSubmit() {
         const content = editInputRef.current?.value.trim();
-        if (!content) return;
+        if (!content) { toast.error("Comment can't be empty"); return; }
+        if (content.length > 300) { toast.error("Comment can't exceed 300 characters"); return; }
         updateComment(content);
         queryClient.invalidateQueries({ queryKey: ['posts'] });
-        queryClient.invalidateQueries({ queryKey: ['comments ', comment?.post]});
+        queryClient.invalidateQueries({ queryKey: ['comments ', comment?.post] });
     }
 
     async function handleCopyComment() {
@@ -58,22 +59,16 @@ export default function CommentCard({ comment }) {
         toast("Comment copied to clipboard ✔️");
     }
     async function handleLikeComment() {
-        console.log("liking");
         likeComment();
-
     }
 
-    const { mutate: likeComment, data: likingData, isPending: isLiking } = useMutation({
+    const { mutate: likeComment, isPending: isLiking } = useMutation({
         mutationFn: () => likePostComment(comment?.post, comment?._id, token),
         onSuccess: () => {
-            console.log('likingData : ', likingData);
-            // likingData.liked = !likingData.liked
-
             toast.success("Comment liked successfully");
             queryClient.invalidateQueries({ queryKey: ['posts'] });
         },
         onError: () => toast.error("Failed to like comment"),
-
     });
 
 
@@ -122,6 +117,7 @@ export default function CommentCard({ comment }) {
                             name='newComment'
                             ref={editInputRef}
                             defaultValue={comment?.content}
+                            maxLength={500}
                             className="input-fields text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 flex-1"
                             autoFocus
                         />

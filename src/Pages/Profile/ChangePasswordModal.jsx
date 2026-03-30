@@ -6,23 +6,34 @@ import {
     ModalHeader,
     useDisclosure
 } from "@heroui/react";
-import { useContext, useState } from "react";
-import { FaEye, FaRegEyeSlash } from "react-icons/fa";
-import { useMutation } from '@tanstack/react-query';
-import { toast } from 'react-toastify';
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from '@tanstack/react-query';
+import { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
+import { FaEye, FaRegEyeSlash } from "react-icons/fa";
+import { toast } from 'react-toastify';
 import * as z from "zod";
+import InputError from "../../Components/InputError";
 import { changePass } from "../../Services/ChangePassword";
 import { AuthContext } from './../../Contexts/AuthContext';
-import InputError from "../../Components/InputError";
 
-const pattern = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()])[a-zA-Z0-9!@#$%^&*()]{8,20}$/
 
 const schema = z.object({
     password: z.string().min(1, "Current password is required"),
-    newPassword: z.string().regex(pattern, "Must be 8-20 chars with uppercase, lowercase, digit & special character"),
-    rePassword: z.string().min(1, "Please confirm your new password"),
+    newPassword: z.string()
+        .min(8, "At least 8 characters")
+        .max(20, "At most 20 characters")
+        .regex(/[a-z]/, "Must contain a lowercase letter")
+        .regex(/[A-Z]/, "Must contain an uppercase letter")
+        .regex(/[0-9]/, "Must contain a number")
+        .regex(/[!@#$%^&*()]/, "Must contain a special character (!@#$%^&*())"),
+    rePassword: z.string()
+        .min(8, "At least 8 characters")
+        .max(20, "At most 20 characters")
+        .regex(/[a-z]/, "Must contain a lowercase letter")
+        .regex(/[A-Z]/, "Must contain an uppercase letter")
+        .regex(/[0-9]/, "Must contain a number")
+        .regex(/[!@#$%^&*()]/, "Must contain a special character (!@#$%^&*())"),
 }).refine(data => data.newPassword === data.rePassword, {
     message: "Passwords do not match",
     path: ["rePassword"],

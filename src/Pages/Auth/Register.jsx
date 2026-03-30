@@ -22,13 +22,24 @@ const schema = z.object({
   email: z.email(),
   dateOfBirth: z.string(),
   gender: z.enum(["male", "female"]),
-  password: z.string().regex(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()])[a-zA-Z0-9!@#$%^&*()]{8,20}$/, "Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character. 8 to 20 characters"),
-  rePassword: z.string().regex(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()])[a-zA-Z0-9!@#$%^&*()]{8,20}$/, "confirm password must match password ."),
+  password: z.string()
+    .min(8, "At least 8 characters")
+    .max(20, "At most 20 characters")
+    .regex(/[a-z]/, "Must contain a lowercase letter")
+    .regex(/[A-Z]/, "Must contain an uppercase letter")
+    .regex(/[0-9]/, "Must contain a number")
+    .regex(/[!@#$%^&*()]/, "Must contain a special character (!@#$%^&*())"),
+  rePassword: z.string()
+    .min(8, "At least 8 characters")
+    .max(20, "At most 20 characters")
+    .regex(/[a-z]/, "Must contain a lowercase letter")
+    .regex(/[A-Z]/, "Must contain an uppercase letter")
+    .regex(/[0-9]/, "Must contain a number")
+    .regex(/[!@#$%^&*()]/, "Must contain a special character (!@#$%^&*())"),
 }).refine((data) => data.password === data.rePassword, {
   message: "Password and confirm password must match",
   path: ["rePassword", "password"],
 }).required();
-// !!!!!!!!!!!!!!!!!!===============================================
 
 
 

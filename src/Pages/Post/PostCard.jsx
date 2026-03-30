@@ -54,15 +54,15 @@ export default function PostCard({ post, details }) {
     return <div className='postCard group text-start '>
         <PostHeader post={post} />
         <div>
-            <Link to={`/post/${post?._id}`} className='mainPostContent w-full mx-4  mt-2 py-2 border-b border-slate-800'>
+            <Link to={`/post/${post?._id}`} className='mainPostContent w-full mx-4 mt-2 md:py-2 border-b border-slate-800'>
                 {post?.body && <p className="postContent ps-3" dir={postTextDir}>{post?.body}</p>}
-                {post?.image && <div className="postImgWrapper group-hover:shadow-[0_0_10px] shadow-indigo-500 my-5 rounded-xl transition-all overflow-hidden w-full h-fit">
+                {post?.image && <div className="postImgWrapper group-hover:shadow-[0_0_10px] shadow-indigo-500 mt-2 md:my-5 rounded-xl transition-all overflow-hidden w-full h-fit">
                     <img src={post?.image} alt={post?.image} className="group-hover:scale-105 transition-all w-full h-full object-cover" />
                 </div>}
             </Link>
-            <div className='flex items-center gap-3 px-4 my-3'>
+            <div className='flex items-center gap-3 px-4  my-1 md:my-3'>
                 <button disabled={isPostingLike} onClick={() => handlePostLike(post?._id)} className="post-footer-icon hover:text-pink-600  ">{
-                    isPostingLike ? <Spinner size="sm" color="danger    " /> :
+                    isPostingLike ? <Spinner size="sm" color="danger" /> :
                         isLiked ? <FaHeart className="text-pink-600" /> : <CiHeart className=' text-xl' />
 
                 }   {likesCount}</button>
@@ -71,6 +71,6 @@ export default function PostCard({ post, details }) {
             </div>
         </div>
         {!details && <PostFooter isCommenting={isCommenting} post={post} />}
-    
+
     </div>
 }
