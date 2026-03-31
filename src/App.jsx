@@ -16,8 +16,6 @@ const PostDetails = lazy(() => import('./Pages/Post/PostDetails'));
 const Profile = lazy(() => import('./Pages/Profile/Profile'));
 const Settings = lazy(() => import('./Pages/Settings/Settings'));
 
-// Created once outside component to avoid re-instantiation on every render
-const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -43,14 +41,12 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <div className='absolute w-fit z-100'><ToastContainer autoClose={2500} /></div>
-      <div className='min-h-screen  bg-slate-950 text-slate-500'>
-        <Suspense fallback={<div className="min-h-screen bg-slate-950" />}>
-          <RouterProvider router={router} />
-        </Suspense>
-      </div>
-    </QueryClientProvider>
-  );
+  return <>
+    <div className='absolute w-fit z-100'><ToastContainer autoClose={2500} /></div>
+    <div className='min-h-screen  bg-slate-950 text-slate-500'>
+      <Suspense fallback={<div className="min-h-screen bg-slate-950" />}>
+        <RouterProvider router={router} />
+      </Suspense>
+    </div>
+  </>
 }

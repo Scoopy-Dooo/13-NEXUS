@@ -11,7 +11,7 @@ export default async function GetAllPosts(token) {
     });
     return await data;
   } catch (error) {
-    console.log("error from get all post service : ", error);
+    // console.log("error from get all post service : ", error);
     return null;
   }
 }
@@ -26,10 +26,10 @@ export default async function GetAllPosts(token) {
 //       },
 //     });
 //     const data = await response.json();
-//     console.log("data inside func : ", data);
+//     // console.log("data inside func : ", data);
 //     return data;
 //   } catch (error) {
-//     console.log("error from get all post service : ", error);
+//     // console.log("error from get all post service : ", error);
 //     return null;
 //   }
 // }

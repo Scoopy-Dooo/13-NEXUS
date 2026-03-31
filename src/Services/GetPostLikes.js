@@ -14,7 +14,7 @@ export async function getPostLikes(postId, token) {
     );
     return await data?.data?.likes;
   } catch (error) {
-    console.log("🚀 ~ getPostLikes ~ error:", error);
+    // console.log("🚀 ~ getPostLikes ~ error:", error);
     return null;
   }
 }

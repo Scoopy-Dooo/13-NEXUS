@@ -15,7 +15,7 @@ export async function BookmarkPost(postId, token) {
 
         return await data?.data;
     } catch (error) {
-        console.log("🚀 ~ BookmarkPost ~ error:", error);
+        // console.log("🚀 ~ BookmarkPost ~ error:", error);
         return null;
     }
 }

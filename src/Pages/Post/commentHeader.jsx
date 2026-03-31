@@ -44,7 +44,7 @@ export default function CommentHeader({ post , comment}) {
     }
     async function handleDeleteComment() {
         const data = await deletePost(post._id, token)
-        console.log("🚀 ~ handleDeleteComment ~ data:", data)
+        // console.log("🚀 ~ handleDeleteComment ~ data:", data)
         notify("Post deleted successfully");
         queryClient.invalidateQueries({ queryKey: ['posts'] });
     }

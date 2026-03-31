@@ -11,7 +11,7 @@ export default async function sendPost(data, token) {
       method: "POST",
       data: formdata,
     });
-    console.log("🚀 ~ sendPost ~ data:", data)
+    // console.log("🚀 ~ sendPost ~ data:", data)
     return data;
   } catch (error) {
     throw new  Error(error);

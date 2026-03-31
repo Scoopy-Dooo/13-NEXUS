@@ -16,20 +16,20 @@ export default function NoteCard({ note }) {
     const config = NOTIFICATION_CONFIG[type] || { message: 'interacted with you', emoji: '✨' };
 
     // Calculate preview text
-    const preview = type === 'comment_post' 
-        ? entity?.content || entity?.body 
-        : type === 'like_post' 
-        ? entity?.body 
-        : null;
+    const preview = type === 'comment_post'
+        ? entity?.content || entity?.body
+        : type === 'like_post'
+            ? entity?.body
+            : null;
 
     // Calculate navigation link
     const navigationLink = type === 'follow_user'
         ? `/profile/${entity?._id}`
         : type === 'comment_post'
-        ? entityType === 'comment' ? `/post/${entity?.post}` : `/post/${entity?._id}`
-        : type === 'like_post'
-        ? `/post/${entity?._id}`
-        : null;
+            ? entityType === 'comment' ? `/post/${entity?.post}` : `/post/${entity?._id}`
+            : type === 'like_post'
+                ? `/post/${entity?._id}`
+                : null;
 
     const cardElement = (
         <Card className="group animate-myAnimate relative bg-linear-to-r from-slate-800 to-slate-900 border border-slate-600 hover:border-slate-500 hover:shadow-lg transition-all duration-200 cursor-pointer overflow-hidden">
@@ -42,12 +42,10 @@ export default function NoteCard({ note }) {
                     <ProfileImg user={actor} />
                     <div className="flex flex-col gap-1 flex-1">
                         <div className="flex items-center gap-2">
-                            <Link
-                                to={`/profile/${actor?._id}`}
-                                className="font-bold text-sm text-white group-hover:text-indigo-400 transition-colors truncate"
-                            >
+
+                            <h3 className="font-bold text-sm text-white group-hover:text-indigo-400 transition-colors truncate">
                                 {actor?.name}
-                            </Link>
+                            </h3>
                             <span className="text-lg">{config.emoji}</span>
                         </div>
                         <p className="text-xs text-slate-400">{config.message}</p>

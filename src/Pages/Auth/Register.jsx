@@ -67,7 +67,7 @@ export default function Register() {
 
 
   async function onSubmit(userData) {
-    console.log( 'userData : ',userData);
+    // console.log( 'userData : ',userData);
     setIsLoading(true)
 
     try {
@@ -80,7 +80,7 @@ export default function Register() {
 
       nav("/login")
       setIsLoading(false)
-      console.log('success : ', data);
+      // console.log('success : ', data);
 
       notify(data?.message)
       return await data
@@ -88,7 +88,7 @@ export default function Register() {
 
     } catch (error) {
       notify(error?.response?.data?.message)
-      console.log('error : ', error);
+      // console.log('error : ', error);
       setIsLoading(false)
     }
 
@@ -98,7 +98,7 @@ export default function Register() {
 
 
 
-  // console.log('zod errors : ', errors);
+  // // console.log('zod errors : ', errors);
 
   return <div className='py-5 min-h-screen w-full bg-main flex items-center justify-center '>
     <div className="container w-full lg:flex justify-center items-center ">

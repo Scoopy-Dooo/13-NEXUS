@@ -21,18 +21,18 @@ export default function PostDetails() {
     queryKey: ['post', id],
     queryFn: () => getOnePost(id, token),
     onError: (error) => {
-      console.log("Error fetching post details:", error);
+      // console.log("Error fetching post details:", error);
     },
   });
   const { data: comments } = useQuery({
     queryKey: ['comments', id],
     queryFn: () => getPostComments(id, token),
     onSuccess: (data) => {
-      console.log("Comments fetched successfully:", data);
+      // console.log("Comments fetched successfully:", data);
     },
     onError: (error) => {
 
-      console.log("Error fetching post details:", error);
+      // console.log("Error fetching post details:", error);
     },
   });
 
@@ -44,7 +44,7 @@ export default function PostDetails() {
     queryKey: ['postLikes', id],
     queryFn: () => getPostLikes(id, token),
     onError: (error) => {
-      console.log("Error fetching post details:", error);
+      // console.log("Error fetching post details:", error);
     },
     refetchOnReconnect: true,
   });

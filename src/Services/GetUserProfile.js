@@ -15,7 +15,7 @@ export async function getMyProfileApi(token) {
 
     return await data?.data?.user;
   } catch (error) {
-    console.log("🚀 ~ getMyProfileApi ~ error:", error);
+    // console.log("🚀 ~ getMyProfileApi ~ error:", error);
     return null;
   }
 }
@@ -34,7 +34,7 @@ export async function getProfileApi(userId, token) {
 
     return await data?.data;
   } catch (error) {
-    console.log("🚀 ~ getProfileApi ~ error:", error);
+    // console.log("🚀 ~ getProfileApi ~ error:", error);
     return null;
   }
 }

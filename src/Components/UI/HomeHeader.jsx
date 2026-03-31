@@ -6,8 +6,8 @@ import ProfileImg from './ProfileImg';
 
 export default function HomeHeader() {
 
-    const { userData } = useContext(UserContext)
-    console.log("🚀 ~ HomeHeader ~ UserContext:", UserContext)
+    const { userData, isNote, unreadCount } = useContext(UserContext)
+
     return <header className='w-full border-b border-slate-800 p-1 md:p-5 flex justify-between items-center'>
         <div className=" flex w-full items-center justify-between">
             <div className='relative w-11/12  me-1'>
@@ -16,7 +16,9 @@ export default function HomeHeader() {
             </div>
             <Link to={"/notifications"} className='w-fit text-xl relative'>
                 <FaRegBell />
-                <span className='size-2.5 animate-blink bg-red-600/80 rounded-full absolute -top-0.5 -right-0.5'></span>
+                {unreadCount?.data?.count > 0 && (
+                    <span className='size-3 flex items-center justify-center text-xs animate-blink bg-red-600/80 rounded-full absolute -top-0.5 -right-0.5'>{unreadCount?.data?.count}</span>
+                )}
             </Link>
         </div>
         <div className='h-8 mx-2 md:mx-5 block bg-slate-800 w-[0.25px] '></div>

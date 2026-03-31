@@ -6,7 +6,7 @@
 
 @theme {
   --color-main: #020618;
-  --animate-myAnimate: myAnimate 3s ease-in-out;
+  --animate-myAnimate: myAnimate 2s ease-in-out;
 }
 
 @keyframes myAnimate {

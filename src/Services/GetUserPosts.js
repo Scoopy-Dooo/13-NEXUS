@@ -12,7 +12,7 @@ export async function getUserPosts(userId, token) {
     );
     return data?.data?.posts;
   } catch (error) {
-    console.log("🚀 ~ getUserPosts ~ error:", error);
+    // console.log("🚀 ~ getUserPosts ~ error:", error);
     return null;
   }
 }

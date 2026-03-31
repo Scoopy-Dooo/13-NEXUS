@@ -14,7 +14,7 @@ export default async function putLikeApi(postId, token) {
     );
     return await data;
   } catch (error) {
-    console.log("🚀 ~ putLikeApi from func  ~ error:", error);
+    // console.log("🚀 ~ putLikeApi from func  ~ error:", error);
     return null;
   }
 }

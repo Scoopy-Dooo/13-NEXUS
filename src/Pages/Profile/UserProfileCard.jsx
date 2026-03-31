@@ -25,7 +25,7 @@ export default function UserProfileCard({ profileData, isLoading, isMyProfile, p
     const { mutate: uploadPhoto, isPending: isUploading } = useMutation({
         mutationFn: (file) => uploadProfileImg(file, token),
         onSuccess: (data) => {
-            // console.log("🚀 ~ UserProfileCard ~ data:", data)
+            // // console.log("🚀 ~ UserProfileCard ~ data:", data)
             const newPhoto = data?.data?.photo;
             if (newPhoto) {
                 setUserData(prev => {

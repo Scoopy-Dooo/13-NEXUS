@@ -30,9 +30,9 @@ export default function Profile() {
   })
 
 
-  console.log("🚀 ~ Profile ~ userPosts:", userPosts?.length)
-  console.log("🚀 ~ Profile ~ myData:", myData)
-  console.log("🚀 ~ Profile ~ otherUsersData:", otherUsersData)
+  // console.log("🚀 ~ Profile ~ userPosts:", userPosts?.length)
+  // console.log("🚀 ~ Profile ~ myData:", myData)
+  // console.log("🚀 ~ Profile ~ otherUsersData:", otherUsersData)
 
 
 
@@ -58,7 +58,7 @@ export default function Profile() {
         <div className="header mb-4">
           <h1 className='text-white text-2xl '>Recent Activity</h1>
         </div>
-        <div className="content grid grid-cols-1 gap-4">
+        <div className="content overflow-hidden grid grid-cols-1 gap-4">
 
           {userPostsLoading && <PostLoadingCard number={3} />}
           {!userPostsLoading && userPosts?.map((post) => <PostCard key={post._id} post={post} />)}

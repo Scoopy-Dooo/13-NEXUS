@@ -13,7 +13,7 @@ export async function getOnePost(postId, token) {
 
     return await data?.data?.post;
   } catch (error) {
-    console.log("🚀 ~ getOnePost ~ error:", error);
+    // console.log("🚀 ~ getOnePost ~ error:", error);
     return null;
   }
 }

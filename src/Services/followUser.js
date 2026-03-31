@@ -11,7 +11,7 @@ export async function followUserApi(userId, token) {
         },
       },
     );
-    console.log("🚀 ~ followUser ~ data:", data);
+    // console.log("🚀 ~ followUser ~ data:", data);
     return data?.data;
   } catch (error) {
     throw new Error(error);

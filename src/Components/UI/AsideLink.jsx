@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { NavLink } from 'react-router';
 import { UserContext } from '../../Contexts/UserContext';
 export default function AsideLink({ icon, text, color, iconOnly, logout }) {
-    // console.log("🚀 ~ AsideLink ~ text:", text)
+    // // console.log("🚀 ~ AsideLink ~ text:", text)
     const { userData } = useContext(UserContext)
     text.startsWith("profile") && (text = "profile")
 
