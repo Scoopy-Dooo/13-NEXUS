@@ -98,19 +98,19 @@ export default function Register() {
 
   // console.log('zod errors : ', errors);
 
-  return <div className='py-5 min-h-screen  w-full bg-main flex items-center justify-center '>
+  return <div className='py-5 min-h-screen w-full bg-main flex items-center justify-center '>
     <div className="container w-full lg:flex justify-center items-center ">
-      <div className="top mb-3 lg:w-2/5 text-center ">
+      <div className="top mb-1 md:mb-3 lg:w-2/5 text-center ">
         <div className='animate-pulse w-fit m-auto '><img className='lg:w-50 w-20 ' src={logo} alt="nexus" /></div>
-        <h2 className='animate-bounce my-1 lg:text-6xl text-4xl font-bold bg-clip-text text-transparent bg-linear-to-r  from-indigo-500 to-pink-400'>NEXUS</h2>
-        <p className='my-2 text-white font-semibold lg:text-4xl text-2xl'>Create An Account</p>
+        <h2 className='animate-bounce md:my-1 lg:text-6xl text-4xl font-bold bg-clip-text text-transparent bg-linear-to-r  from-indigo-500 to-pink-400'>NEXUS</h2>
+        <p className='md:my-2 text-white font-semibold lg:text-4xl text-2xl'>Create An Account</p>
         <p className='text-slate-400 lg:text-xl text-medium'>Join the future of social networking</p>
       </div>
       <div className="lg:w-2/5 m-auto bg-slate-950 rounded-xl border  border-slate-700">
-        <div className="relative overflow-hidden rounded-xl p-4 w-full">
+        <div className="relative overflow-hidden rounded-xl p-1 py-2 md:p-4 w-full">
           <div className="absolute h-0.5 top-0 left-0 right-0 bg-linear-to-r from-indigo-400 to-pink-400"></div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className='text-slate-300 my-3'>
+          <form onSubmit={handleSubmit(onSubmit)} className='text-slate-300 my-1 md:my-3'>
             {/* full name */}
             <div className='mb-3'>
               <label className='fullName' htmlFor="">Full Name</label>
@@ -168,7 +168,7 @@ export default function Register() {
             </div>
             {/* gender */}
             <div className='mb-3'>
-              <label className='' htmlFor="male">Gender</label>
+              <label className='' htmlFor="male">Gender:</label>
               <div className='flex gap-1 items-center'>
                 <input {...register("gender")} className='' id='male' name='gender' value={"male"} type="radio" />
                 <label className='flex items-center me-3' htmlFor="male"><span className='text-blue-400 me-1 '><IoMdMale /></span>Male</label>
@@ -190,7 +190,7 @@ export default function Register() {
               <span><FaArrowRight className='translate-y-0.5 ms-1 group-hover:translate-x-1 transition text-sm' /></span>
             </Button>
           </form>
-          <div className='py-2 border-t border-slate-700 text-center'>
+          <div className='pt-1 md:py-2 border-t border-slate-700 text-center'>
 
             <p className="text-slate-500">Already have an account? <Link className='text-indigo-600 hover:text-indigo-300' to={"/login"}> Sign in</Link></p>
 
