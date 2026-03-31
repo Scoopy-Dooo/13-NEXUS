@@ -45,7 +45,7 @@ export default function LogIn() {
         setToken(token)
         setUserData(data?.data?.user)
       }
-      toast("Logged in successfully!")
+      toast.success("Logged in successfully!" , {autoClose: 1500}) 
       nav("/home")
     },
     onError: (error) => {

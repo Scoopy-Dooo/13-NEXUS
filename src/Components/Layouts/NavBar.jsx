@@ -1,16 +1,20 @@
+import { useContext } from 'react'
 import { FiBell, FiHome, FiLogOut, FiUser } from 'react-icons/fi'
 import { GoGear } from "react-icons/go"
 import { IoChatbubbleOutline } from "react-icons/io5"
 import logo from "../../assets/logo2 cut.png"
+import { UserContext } from '../../Contexts/UserContext'
 import AsideLink from '../UI/AsideLink'
 import LogoutModal from '../UI/LogoutModal'
 
 export default function NavBar({ mobile }) {
+  const { userData } = useContext(UserContext)
+
   const links = [
     { name: "home", icon: <FiHome /> },
     { name: "notifications", icon: <FiBell /> },
     { name: "massages", icon: <IoChatbubbleOutline /> },
-    { name: "profile", icon: <FiUser /> },
+    { name: `profile/${userData?._id}`, icon: <FiUser /> },
     { name: "settings", icon: <GoGear /> },
   ]
 

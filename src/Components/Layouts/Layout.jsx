@@ -1,30 +1,22 @@
+import { Button } from '@heroui/react';
 import { useContext } from 'react';
-import { Outlet, useLocation } from 'react-router';
+import { FaArrowUp } from 'react-icons/fa';
+import { Outlet } from 'react-router';
+import { AuthContext } from '../../Contexts/AuthContext';
 import Footer from './Footer';
 import NavBar from './NavBar';
-import { AuthContext } from '../../Contexts/AuthContext';
 
-const pageTitles = {
-    '/': 'Home',
-    '/home': 'Home',
-    '/login': 'Login',
-    '/register': 'Register',
-    '/notifications': 'Notifications',
-    '/massages': 'Messages',
-    '/settings': 'Settings',
-};
 
 export default function Layout() {
     const { token } = useContext(AuthContext)
-    const { pathname } = useLocation()
-    const segment = '/' + pathname.split('/')[1];
-    const pageTitle = pageTitles[segment]
-        ?? (pathname.startsWith('/profile') ? 'Profile'
-            : pathname.startsWith('/post') ? 'Post'
-                : 'NEXUS');
+
+
+    function goUp() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
     return <>
-        <title>NEXUS | {pageTitle}</title>
+        <title>NEXUS </title>
         {token ? <>
             <div className='w-full min-h-screen md:grid md:grid-cols-6 lg:grid-cols-8'>
                 <div className='hidden md:block md:col-span-1 lg:col-span-2'><NavBar /></div>
@@ -40,5 +32,11 @@ export default function Layout() {
                 <Footer />
             </div>
         </>}
+
+        <Button
+            className='fixed bottom-24 sm:bottom-12 right-4 animate-[blink_3s_ease-in-out_infinite]  z-50 bg-indigo-600 text-white max-sm:size-8 max-sm:min-w-0  rounded-full shadow-lg hover:bg-indigo-500 active:scale-95 transition-all '
+            onPress={goUp}>
+            <span className='text-sm'><FaArrowUp /></span>
+        </Button>
     </>
 }

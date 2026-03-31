@@ -189,13 +189,14 @@ export default function Register() {
                 <InputError message={errors.gender?.message} />
               </div>
             </div>
-            <p className='text-sm flex gap-1 items-center'>
+            <p className='sm:text-sm flex gap-1  text-nowrap items-center text-xs '>
               <input id="registerTerms" type="checkbox" className='peer hidden' />
               <label className='peer-checked:text-indigo-600  text-slate-700 text-lg' htmlFor='registerTerms'><FaCheckCircle /></label>
+
               I agree to the
-              <Link className='text-indigo-600 hover:text-indigo-300' to={"/register"}> Terms of Service</Link>
+              <span className='text-indigo-600 hover:text-indigo-300'> Terms of Service</span>
               and
-              <Link className='text-indigo-600 hover:text-indigo-300' to={"/register"}>Privacy Policy</Link>
+              <span className='text-indigo-600 hover:text-indigo-300'>Privacy Policy</span>
             </p>
             <Button isLoading={isLoading} type='submit' className='shadow-indigo-800 shadow-[0px_2px_10px_0.5px] rounded-lg w-full py-2 my-3 bg-linear-to-r from-indigo-600 to-pink-600 flex items-center justify-center cursor-pointer group'>
               <span>Create Account</span>

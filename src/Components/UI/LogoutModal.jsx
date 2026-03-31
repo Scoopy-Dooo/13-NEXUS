@@ -26,7 +26,7 @@ export default function LogoutModal({ trigger }) {
     localStorage.removeItem('token');
     localStorage.removeItem('userData');
     nav("/login");
-    toast("Logged out successfully");
+    toast.success("Logged out successfully", { autoClose: 1500 });
   }
 
   return (
@@ -37,7 +37,6 @@ export default function LogoutModal({ trigger }) {
           <FiLogOut />Logout
         </Button>
       }
-
       <Modal hideCloseButton className="bg-slate-900 text-slate-300" isOpen={isOpen} placement="center" onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (

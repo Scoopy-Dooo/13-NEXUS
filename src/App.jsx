@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       { path: "/notifications", element: <Guard><Notifications /></Guard> },
       { path: "login", element: <Guard authOnly={false}><LogIn /></Guard> },
       { path: "register", element: <Guard authOnly={false}><Register /></Guard> },
-      { path: "*", element: <Guard><NotFound /></Guard> },
+      { path: "*", element: <NotFound /> },
     ],
   },
 ]);
