@@ -128,7 +128,7 @@ export default function PostModal({ userData }) {
                                 <input onChange={previewImage} ref={imageRef} id="postImage" className="hidden" type="file" />
                                 <button onClick={() => setShowEmoji(prev => !prev)} className="modalIcons hover:bg-indigo-800 hover:text-indigo-300 text-indigo-400 "><CiFaceSmile /></button>
                                 {showEmoji && (
-                                    <div className="absolute bottom-12 left-0 max-w-96 bg-slate-800 rounded-lg p-2 grid grid-cols-5 gap-1 shadow-lg">
+                                    <div className="absolute bottom-12 left-0 max-w-96npm bg-slate-800 rounded-lg p-2 grid grid-cols-5 gap-1 shadow-lg">
                                         {myEmojis.map((emoji, index) => (
                                             <button
                                                 key={index}
