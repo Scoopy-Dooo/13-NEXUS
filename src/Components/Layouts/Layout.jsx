@@ -24,6 +24,11 @@ export default function Layout() {
             </div>
             <NavBar mobile />
             <Footer />
+            <Button
+                className='fixed bottom-24 sm:bottom-12 right-4 animate-[blink_3s_ease-in-out_infinite]  z-50 bg-indigo-600 text-white max-sm:size-8 max-sm:min-w-0  rounded-full shadow-lg hover:bg-indigo-500 active:scale-95 transition-all '
+                onPress={goUp}>
+                <span className='text-sm'><FaArrowUp /></span>
+            </Button>
         </> : <>
             <div className=''>
                 <div className='w-full  '>
@@ -33,10 +38,6 @@ export default function Layout() {
             </div>
         </>}
 
-        <Button
-            className='fixed bottom-24 sm:bottom-12 right-4 animate-[blink_3s_ease-in-out_infinite]  z-50 bg-indigo-600 text-white max-sm:size-8 max-sm:min-w-0  rounded-full shadow-lg hover:bg-indigo-500 active:scale-95 transition-all '
-            onPress={goUp}>
-            <span className='text-sm'><FaArrowUp /></span>
-        </Button>
+
     </>
 }
