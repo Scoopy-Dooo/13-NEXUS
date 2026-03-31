@@ -103,7 +103,7 @@ export default function Register() {
   return <div className='py-5 min-h-screen w-full bg-main flex items-center justify-center '>
     <div className="container w-full lg:flex justify-center items-center ">
       <div className="top mb-1 md:mb-3 lg:w-2/5 text-center ">
-        <div className='animate-pulse w-fit m-auto '><img className='lg:w-50 w-20 ' src={logo} alt="nexus" /></div>
+        <div className='animate-pulse w-fit m-auto '><img className='lg:w-50 w-20 ' width="80" height="80" src={logo} alt="nexus" /></div>
         <h2 className='animate-bounce md:my-1 lg:text-6xl text-4xl font-bold bg-clip-text text-transparent bg-linear-to-r  from-indigo-500 to-pink-400'>NEXUS</h2>
         <p className='md:my-2 text-white font-semibold lg:text-4xl text-2xl'>Create An Account</p>
         <p className='text-slate-400 lg:text-xl text-medium'>Join the future of social networking</p>

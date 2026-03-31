@@ -67,7 +67,7 @@ export default function LogIn() {
   return <div className='py-5 min-h-screen w-full bg-main flex items-center justify-center '>
     <div className="container w-full flex-col justify-center items-center gap-2 ">
       <div className="top mb-3 lg:w-1/2 m-auto text-center ">
-        <div className='animate-pulse w-fit m-auto '><img className=' w-20 ' src={logo} alt="nexus" /></div>
+        <div className='animate-pulse w-fit m-auto '><img className=' w-20 ' width="80" height="80" src={logo} alt="nexus" /></div>
         <h2 className='animate-bounce my-1  text-4xl font-bold bg-clip-text text-transparent bg-linear-to-r  from-indigo-500 to-pink-400'>NEXUS</h2>
         <p className='mt-2 text-white font-semibold  text-2xl'>Welcome</p>
         <p className='text-slate-400  text-medium'>Sign in to continue to your Account</p>

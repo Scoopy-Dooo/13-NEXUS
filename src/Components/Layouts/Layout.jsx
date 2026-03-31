@@ -21,7 +21,6 @@ export default function Layout() {
     
 
     return <>
-        <title>NEXUS </title>
         {token ? <>
             <div className='w-full min-h-screen md:grid md:grid-cols-6 lg:grid-cols-8'>
                 <div className='hidden md:block md:col-span-1 lg:col-span-2'><NavBar /></div>

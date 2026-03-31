@@ -31,7 +31,7 @@ export default function NavBar({ mobile }) {
     <div className='flex flex-col justify-between sticky top-0 h-screen pt-3 pb-12!'>
       <div className='flex flex-col gap-5 h-full lg:gap-10'>
         <div className="flex flex-wrap max-lg:flex-col justify-start items-center gap-1 lg:gap-2">
-          <span className='size-12 p-2 bg-linear-60 from-indigo-900 to-indigo-950 rounded-xl justify-center items-center'><img className='w-full' src={logo} alt="NEXUS logo" /></span>
+          <span className='size-12 p-2 bg-linear-60 from-indigo-900 to-indigo-950 rounded-xl justify-center items-center'><img className='w-full' width="40" height="40" src={logo} alt="NEXUS logo" /></span>
           <h2 className='lg:text-3xl text-xl text-transparent bg-clip-text bg-linear-120 from-indigo-500 to-indigo-900 font-bold'>
             Nexus
           </h2>

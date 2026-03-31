@@ -1,11 +1,12 @@
 import { lazy, Suspense } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import { ToastContainer } from 'react-toastify';
 import Layout from './Components/Layouts/Layout';
 import Guard from './Guard';
-import EditProfile from './Pages/Profile/EditProfile';
 import NotFound from './Pages/NotFound/NotFound';
+import EditProfile from './Pages/Profile/EditProfile';
+import { Spinner } from '@heroui/react';
+
 
 const LogIn = lazy(() => import('./Pages/Auth/LogIn'));
 const Register = lazy(() => import('./Pages/Auth/Register'));
@@ -44,7 +45,8 @@ export default function App() {
   return <>
     <div className='absolute w-fit z-100'><ToastContainer autoClose={2500} /></div>
     <div className='min-h-screen  bg-slate-950 text-slate-500'>
-      <Suspense fallback={<div className="min-h-screen bg-slate-950" />}>
+      <Suspense fallback={<div className="min-h-screen bg-slate-950 w-full flex items-center justify-center">      <Spinner color="secondary" label="please wait" labelColor="secondary" />
+      </div>}>
         <RouterProvider router={router} />
       </Suspense>
     </div>
