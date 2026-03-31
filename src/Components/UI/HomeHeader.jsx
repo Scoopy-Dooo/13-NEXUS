@@ -6,7 +6,7 @@ import ProfileImg from './ProfileImg';
 
 export default function HomeHeader() {
 
-    const { userData, isNote, unreadCount } = useContext(UserContext)
+    const { userData, unreadCount } = useContext(UserContext)
 
     return <header className='w-full border-b border-slate-800 p-1 md:p-5 flex justify-between items-center'>
         <div className=" flex w-full items-center justify-between">
