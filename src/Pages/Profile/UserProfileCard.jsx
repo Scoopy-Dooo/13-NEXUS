@@ -80,7 +80,7 @@ export default function UserProfileCard({ profileData, isLoading, isMyProfile, p
             )}
 
             <div className="mainContent p-4">
-                <div className="header relative w-full text-end mb-15">
+                <div className="header relative w-full text-end mb-15"></div>
                     <div className='absolute -translate-y-1/2 backdrop-blur-2xl rounded-full'>
                         {isMyProfile ? (
                             <>
