@@ -1,8 +1,8 @@
 import React from 'react'
 import { IoMdHeartEmpty } from 'react-icons/io'
 
-export default function Footer({ mobile }) {
-  return <div className='fixed z-100 bottom-0 w-full py-0.5 md:py-2 bg-slate-900 text-slate-500'>
+export default function Footer() {
+  return <div className='fixed z-100 bottom-0 w-full py-0.5 md:py-2 bg-slate-900 text-slate-500  md:block'>
     <p className='flex gap-1  max-md:text-xs items-center justify-center'>
       © 2026 NEXUS
       ,made with

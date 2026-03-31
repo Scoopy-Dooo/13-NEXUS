@@ -13,6 +13,7 @@ export default function NavBar({ mobile }) {
     { name: "profile", icon: <FiUser /> },
     { name: "settings", icon: <GoGear /> },
   ]
+
   // Mobile bottom bar
   if (mobile) {
     return <nav className='md:hidden fixed bottom-4 left-0 right-0 z-50 bg-slate-900 border-t border-slate-800 flex items-center justify-around px-2 py-2'>
@@ -37,7 +38,7 @@ export default function NavBar({ mobile }) {
       </div>
       <LogoutModal trigger={
         <div className='w-full cursor-pointer'>
-          <AsideLink text={"logout"} color={"red"} icon={<FiLogOut />} />
+          <AsideLink logout text={"logout"} color={"red"} icon={<FiLogOut />} />
         </div>
       } />
     </div>

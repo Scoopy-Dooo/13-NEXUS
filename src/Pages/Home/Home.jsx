@@ -5,7 +5,7 @@ import GetAllPosts from '../../Services/GetPosts';
 import PostModal from '../Post/PostModal';
 import ProfileImg from './../../Components/UI/ProfileImg';
 import PostCard from './../Post/PostCard';
-import {useQuery} from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import HomeHeader from '../../Components/UI/HomeHeader';
 import PostLoadingCard from '../Post/PostLoadingCard';
 import { CiRedo } from 'react-icons/ci';
@@ -21,7 +21,7 @@ export default function Home() {
     staleTime: 1000 * 60,
     gcTime: 1000 * 60 * 10,
     refetchInterval: 1000 * 60 * 2,
-  
+
   })
 
   const posts = data?.data?.posts
@@ -34,14 +34,16 @@ export default function Home() {
         {/* <section id='homeAsideProfile' className=""></section> */}
 
 
-        <section className="addPost rounded-xl group  border-1 border-transparent  hover:border-slate-800 bg-slate-900/50 p-3 addPosts w-full flex items-center justify-start gap-3">
-          <ProfileImg user={userData} />
-          <div className='relative w-full '>
-            <PostModal userData={userData} />
+        <section className="addPost rounded-xl group  border-1 border-transparent  hover:border-slate-800 bg-slate-900/50 p-1 md:p-3 addPosts w-full flex  items-center justify-start md:gap-3">
+          <div className='w-fit hidden md:block'>
+            <ProfileImg user={userData} />
           </div>
+          <PostModal userData={userData} />
+          {/* <div className='relative w-full '> */}
+          {/* </div> */}
         </section>
 
-        <section className="allPosts py-5 grid grid-cols-1 gap-5">
+        <section className="allPosts overflow-hidden py-5 grid grid-cols-1 gap-5">
           {isLoading && <PostLoadingCard number={7} />}
           {isError &&
             <div className='fixed inset-0 flex flex-col items-center justify-center gap-2 text-slate-500 text-lg '>
@@ -53,7 +55,7 @@ export default function Home() {
               </div>
             </div>}
           {isFetching && !isLoading && (
-            <div className='fixed bottom-8 left-1/2 -translate-x-1/2 z-50 animate-bounce flex items-center gap-2 px-4 py-2.5 rounded-full bg-slate-800/90 backdrop-blur-sm border border-slate-700 shadow-lg text-sm text-slate-300'>
+            <div className='fixed bottom-20 md:bottom-8 text-nowrap left-1/2 -translate-x-1/2 z-50 animate-bounce flex items-center gap-2 px-4 py-2.5 rounded-full bg-slate-800/90 backdrop-blur-sm border border-slate-700 shadow-lg text-sm text-slate-300'>
               <span className='size-2 rounded-full bg-indigo-700 animate-ping' />
               Loading latest posts...
             </div>

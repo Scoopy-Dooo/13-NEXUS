@@ -50,11 +50,11 @@ export default function PostModal({ userData }) {
     function handleSendPost() {
         const image = imageRef.current?.files?.[0] || null;
         const content = contentRef.current?.value.trim() || '';
-
         if (!content && !image) {
             setError('Please enter text or select an image before posting.');
             return;
         }
+        if (content.length > 500) { setError("Post can't exceed 500 characters"); return; }
         setError('');
         submitPost({ text: content, image });
     }
@@ -88,16 +88,16 @@ export default function PostModal({ userData }) {
     }
 
     return <>
-        <Button className="w-full relative bg-transparent text-slate-200  pe-0 " onPress={openModal} type="button">
-            <div className='text-start cursor-pointer  peer rounded-xl bg-slate-900 focus:bg-slate-800/50 hover:bg-slate-800 border-0 p-3   w-full  transition-all'>
+        <Button className="w-full relative bg-transparent text-slate-200 max-md:p-0 pe-0 " onPress={openModal} type="button">
+            <div className='text-xs sm:text-sm md:text-base text-start cursor-pointer  peer rounded-xl bg-slate-900 focus:bg-slate-800/50 hover:bg-slate-800 border-0 py-2 px-1.5 md:p-3 w-full  transition-all'>
                 Whats on your mind, {userData?.name ?? "User"}?</div>
-            <span className='peer-focus:text-indigo-400 absolute top-0 bottom-0 right-10 text-lg flex items-center modalIcons modalIcons  font-bold text-pink-500'>  <CiImageOn /></span>
-            <span className='peer-focus:text-indigo-400 absolute top-0  bottom-0 right-2 text-lg flex items-center modalIcons  font-bold text-indigo-500'><CiFaceSmile /></span>
+            <span className='peer-focus:text-indigo-400 absolute top-0 max-[320px]:hidden bottom-0 right-10 text-lg flex items-center modalIcons modalIcons  font-bold text-pink-500'><CiImageOn /></span>
+            <span className='peer-focus:text-indigo-400 absolute top-0 max-[320px]:hidden bottom-0 right-2 text-lg flex items-center modalIcons  font-bold text-indigo-500'><CiFaceSmile /></span>
         </Button>
         {isOpen && (
             <div className="fixed inset-0 z-50 flex items-center justify-center">
                 <div className="absolute inset-0 bg-black/50" onClick={handlecloseModal} />
-                <div className="relative z-10 w-11/12 max-w-xl rounded-xl bg-slate-900 text-white p-4">
+                <div className="relative z-10 w-11/12 max-w-xl rounded-xl bg-slate-900 text-white p-1 md:p-4">
                     <div className="flex items-center justify-between px-2 pb-2 border-b border-slate-800">
                         <p className="font-bold">Create Post</p>
                         <Button className="text-lg" color="danger" variant="flat" onPress={handlecloseModal}>
@@ -113,7 +113,7 @@ export default function PostModal({ userData }) {
 
                         {imageUrl &&
                             <div className=" overflow-hidden relative rounded-lg w-fit m-auto">
-                                <Button className="absolute top-2 right-2" color="danger" variant="flat" onPress={handleClearImage} >
+                                <Button className="absolute opacity-50 -top-2 -right-6  bg-transparent text-pink-600 " color="danger" size="md" variant="solid" onPress={handleClearImage} >
                                     <IoIosCloseCircleOutline className="text-2xl " />
                                 </Button>
                                 <img className=" overflow-hidden h-80 w-full object-contain" src={imageUrl} alt="preview" />

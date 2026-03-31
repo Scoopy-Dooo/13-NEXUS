@@ -55,7 +55,7 @@ export default function PostCard({ post, details }) {
         <PostHeader post={post} />
         <div>
             <Link to={`/post/${post?._id}`} className='mainPostContent w-full mx-4 mt-2 md:py-2 border-b border-slate-800'>
-                {post?.body && <p className="postContent ps-3" dir={postTextDir}>{post?.body}</p>}
+                {post?.body && <p className="postContent ps-3 whitespace-pre-wrap" dir={postTextDir}>{post?.body}</p>}
                 {post?.image && <div className="postImgWrapper group-hover:shadow-[0_0_10px] shadow-indigo-500 mt-2 md:my-5 rounded-xl transition-all overflow-hidden w-full h-fit">
                     <img src={post?.image} alt={post?.image} className="group-hover:scale-105 transition-all w-full h-full object-cover" />
                 </div>}

@@ -4,6 +4,7 @@ import {
     ModalBody,
     ModalContent,
     ModalHeader,
+    Tooltip,
     useDisclosure
 } from "@heroui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -96,9 +97,11 @@ export default function ChangePassModal() {
                                                 placeholder="Enter your current password"
                                                 className="input-fields focus:outline-none focus:ring-2 focus:ring-indigo-600 text-sm"
                                                 type={showCurrent ? "text" : "password"} />
-                                            <button type="button" onClick={() => setShowCurrent(p => !p)} className="cursor-pointer p-2 active:scale-95 transition-all absolute right-2 top-1/2 -translate-y-1/2">
-                                                {showCurrent ? <FaEye className='text-pink-700' /> : <FaRegEyeSlash className='text-indigo-700' />}
-                                            </button>
+                                            <Tooltip content={showCurrent ? "Hide password" : "Show password"} placement="left" classNames={{ base: "bg-slate-800 border border-slate-700", content: `text-xs font-medium ${showCurrent ? "text-pink-400" : "text-indigo-400"}` }}>
+                                                <button type="button" onClick={() => setShowCurrent(p => !p)} className="cursor-pointer p-2 active:scale-95 transition-all absolute right-2 top-1/2 -translate-y-1/2">
+                                                    {showCurrent ? <FaEye className='text-pink-700' /> : <FaRegEyeSlash className='text-indigo-700' />}
+                                                </button>
+                                            </Tooltip>
                                         </div>
                                         <InputError message={errors.password?.message} />
                                     </div>
@@ -110,9 +113,11 @@ export default function ChangePassModal() {
                                                 placeholder="Enter your new password"
                                                 className="input-fields focus:outline-none focus:ring-2 focus:ring-indigo-600 text-sm"
                                                 type={showNew ? "text" : "password"} />
-                                            <button type="button" onClick={() => setShowNew(p => !p)} className="cursor-pointer p-2 active:scale-95 transition-all absolute right-2 top-1/2 -translate-y-1/2">
-                                                {showNew ? <FaEye className='text-pink-700' /> : <FaRegEyeSlash className='text-indigo-700' />}
-                                            </button>
+                                            <Tooltip content={showNew ? "Hide password" : "Show password"} placement="left" classNames={{ base: "bg-slate-800 border border-slate-700", content: `text-xs font-medium ${showNew ? "text-pink-400" : "text-indigo-400"}` }}>
+                                                <button type="button" onClick={() => setShowNew(p => !p)} className="cursor-pointer p-2 active:scale-95 transition-all absolute right-2 top-1/2 -translate-y-1/2">
+                                                    {showNew ? <FaEye className='text-pink-700' /> : <FaRegEyeSlash className='text-indigo-700' />}
+                                                </button>
+                                            </Tooltip>
                                         </div>
                                         <InputError message={errors.newPassword?.message} />
                                     </div>
@@ -124,9 +129,11 @@ export default function ChangePassModal() {
                                                 placeholder="Confirm your new password"
                                                 className="input-fields focus:outline-none focus:ring-2 focus:ring-indigo-600 text-sm"
                                                 type={showConfirm ? "text" : "password"} />
-                                            <button type="button" onClick={() => setShowConfirm(p => !p)} className="cursor-pointer p-2 active:scale-95 transition-all absolute right-2 top-1/2 -translate-y-1/2">
-                                                {showConfirm ? <FaEye className='text-pink-700' /> : <FaRegEyeSlash className='text-indigo-700' />}
-                                            </button>
+                                            <Tooltip content={showConfirm ? "Hide password" : "Show password"} placement="left" classNames={{ base: "bg-slate-800 border border-slate-700", content: `text-xs font-medium ${showConfirm ? "text-pink-400" : "text-indigo-400"}` }}>
+                                                <button type="button" onClick={() => setShowConfirm(p => !p)} className="cursor-pointer p-2 active:scale-95 transition-all absolute right-2 top-1/2 -translate-y-1/2">
+                                                    {showConfirm ? <FaEye className='text-pink-700' /> : <FaRegEyeSlash className='text-indigo-700' />}
+                                                </button>
+                                            </Tooltip>
                                         </div>
                                         <InputError message={errors.rePassword?.message} />
                                     </div>

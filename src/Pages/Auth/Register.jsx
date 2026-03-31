@@ -1,9 +1,9 @@
-import { Button } from '@heroui/react';
+import { Button, Tooltip } from '@heroui/react';
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from 'axios';
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
-import { FaArrowRight, FaCheckCircle, FaLock } from 'react-icons/fa';
+import { FaArrowRight, FaCheckCircle, FaEye, FaLock, FaRegEyeSlash } from 'react-icons/fa';
 import { FiUser } from 'react-icons/fi';
 import { HiOutlineMail } from 'react-icons/hi';
 import { IoMdMale } from 'react-icons/io';
@@ -42,9 +42,10 @@ const schema = z.object({
 }).required();
 
 
-
 export default function Register() {
   const [isLoading, setIsLoading] = useState(false)
+  const [showPass, setShowPass] = useState(false)
+  const [showRePass, setShowRePass] = useState(false)
   const nav = useNavigate()
 
   const { register, handleSubmit, formState: { errors } } = useForm({
@@ -66,6 +67,7 @@ export default function Register() {
 
 
   async function onSubmit(userData) {
+    console.log( 'userData : ',userData);
     setIsLoading(true)
 
     try {
@@ -143,8 +145,13 @@ export default function Register() {
             <div className='mb-3'>
               <label className='' htmlFor="password">Password</label>
               <div className='relative w-full'>
-                <input {...register("password")} id='password' className='peer outline-indigo-800 focus:outline-2 w-full ps-8 input-fields' type="password" autoComplete="new-password" placeholder='Enter Your Password' />
+                <input {...register("password")} id='password' className='peer outline-indigo-800 focus:outline-2 w-full ps-8 pe-8 input-fields' type={showPass ? "text" : "password"} autoComplete="new-password" placeholder='Enter Your Password' />
                 <span className='peer-focus:text-indigo-400 absolute top-0 bottom-0 left-2 text-lg flex items-center'><FaLock /></span>
+                <Tooltip content={showPass ? "Hide password" : "Show password"} placement="top" classNames={{ base: "bg-slate-800 border border-slate-700", content: `text-xs font-medium ${showPass ? "text-pink-400" : "text-indigo-400"}` }}>
+                  <button type='button' onClick={() => setShowPass(p => !p)} className='absolute top-0 bottom-0 right-2 text-lg flex items-center cursor-pointer'>
+                    {showPass ? <FaEye className='text-pink-700' /> : <FaRegEyeSlash className='text-indigo-700' />}
+                  </button>
+                </Tooltip>
                 <InputError message={errors.password?.message} />
               </div>
             </div>
@@ -152,8 +159,13 @@ export default function Register() {
             <div className='mb-3'>
               <label className='' htmlFor="rePassword">Confirm Password</label>
               <div className='relative w-full'>
-                <input {...register("rePassword")} id='rePassword' className='peer outline-indigo-800 focus:outline-2 w-full ps-8 input-fields' type="password" autoComplete="new-password" placeholder='Confirm Your Password' />
-                <span className='peer-focus:text-indigo-400   absolute top-0 bottom-0 left-2 text-lg flex items-center'><TbLockCheck /></span>
+                <input {...register("rePassword")} id='rePassword' className='peer outline-indigo-800 focus:outline-2 w-full ps-8 pe-8 input-fields' type={showRePass ? "text" : "password"} autoComplete="new-password" placeholder='Confirm Your Password' />
+                <span className='peer-focus:text-indigo-400 absolute top-0 bottom-0 left-2 text-lg flex items-center'><TbLockCheck /></span>
+                <Tooltip content={showRePass ? "Hide password" : "Show password"} placement="top" classNames={{ base: "bg-slate-800 border border-slate-700", content: `text-xs font-medium ${showRePass ? "text-pink-400" : "text-indigo-400"}` }}>
+                  <button type='button' onClick={() => setShowRePass(p => !p)} className='absolute top-0 bottom-0 right-2 text-lg flex items-center cursor-pointer'>
+                    {showRePass ? <FaEye className='text-pink-700' /> : <FaRegEyeSlash className='text-indigo-700' />}
+                  </button>
+                </Tooltip>
                 <InputError message={errors.rePassword?.message} />
               </div>
             </div>

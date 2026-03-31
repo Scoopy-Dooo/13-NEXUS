@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import Layout from './Components/Layouts/Layout';
 import Guard from './Guard';
 import EditProfile from './Pages/Profile/EditProfile';
+import NotFound from './Pages/NotFound/NotFound';
 
 const LogIn = lazy(() => import('./Pages/Auth/LogIn'));
 const Register = lazy(() => import('./Pages/Auth/Register'));
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
       { path: "/notifications", element: <Guard><Notifications /></Guard> },
       { path: "login", element: <Guard authOnly={false}><LogIn /></Guard> },
       { path: "register", element: <Guard authOnly={false}><Register /></Guard> },
+      { path: "*", element: <Guard><NotFound /></Guard> },
     ],
   },
 ]);

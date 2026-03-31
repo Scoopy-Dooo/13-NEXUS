@@ -101,7 +101,7 @@ export default function PostHeader({ post }) {
 
             <Dropdown className="text-slate-400 bg-transparent">
                 <DropdownTrigger>
-                    <Button className="text-xl min-w-5 w-fit h-7 hover:text-pink-600 hover:bg-indigo-800 active:scale-95 bg-slate-800 transition-all rounded-full">
+                    <Button className="text-xl min-w-5 w-fit h-7 hover:text-slate-800 hover:bg-indigo-200 active:scale-95 bg-slate-800 transition-all rounded-full">
                         <HiDotsHorizontal />
                     </Button>
                 </DropdownTrigger>

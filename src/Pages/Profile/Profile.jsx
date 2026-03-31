@@ -2,15 +2,19 @@ import { useQuery } from '@tanstack/react-query'
 import { useContext } from 'react'
 import { useParams } from 'react-router'
 import HomeHeader from '../../Components/UI/HomeHeader'
-import UserProfileCard from './UserProfileCard'
 import { AuthContext } from '../../Contexts/AuthContext'
+import { UserContext } from '../../Contexts/UserContext'
 import { getUserPosts } from '../../Services/GetUserPosts'
 import { getMyProfileApi, getProfileApi } from '../../Services/GetUserProfile'
 import PostCard from './../Post/PostCard'
 import PostLoadingCard from './../Post/PostLoadingCard'
+import UserProfileCard from './UserProfileCard'
 export default function Profile() {
   const { token } = useContext(AuthContext)
+  const { userData } = useContext(UserContext)
   const { userId } = useParams()
+
+  const myId = userData?._id
 
   const { isLoading, data: myData } = useQuery({
     queryKey: ['myProfile', userId],
@@ -26,14 +30,29 @@ export default function Profile() {
   })
 
 
+  console.log("🚀 ~ Profile ~ userPosts:", userPosts?.length)
+  console.log("🚀 ~ Profile ~ myData:", myData)
+  console.log("🚀 ~ Profile ~ otherUsersData:", otherUsersData)
 
+
+
+
+  const isMyProfile = userId === myId
+
+  const profileData = isMyProfile ? myData : otherUsersData?.user
 
   return <div>
-    {/* header with search and logo  */}
     <HomeHeader />
 
-    <section className="main-user-page my-7 w-9/12 mx-auto ">
-      <UserProfileCard isPostLoading={userPostsLoading} isLoading={isLoading} className={""} myData={myData} />
+    <section className="main-user-page my-6 px-2 md:px-4">
+      <UserProfileCard
+      isFollowing={otherUsersData?.isFollowing}
+        postCounts={userPosts?.length || 0}
+        isLoading={isLoading}
+        profileData={profileData}
+        isMyProfile={isMyProfile}
+        userId={userId}
+      />
 
       <div className="userPosts my-6">
         <div className="header mb-4">

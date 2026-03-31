@@ -20,7 +20,7 @@ export default function PostFooter({ post, isCommenting }) {
         mutationFn: commentContent => SendComment(post?._id, commentContent, token),
         onSuccess: () => {
             toast.success("Comment sent successfully")
-            queryClient.invalidateQueries({ queryKey: ['post', post?._id] })
+            queryClient.invalidateQueries({ queryKey: ['posts'] })
         },
         onError: () => {
             toast.error("Failed to send comment")
@@ -39,14 +39,12 @@ export default function PostFooter({ post, isCommenting }) {
 
     return <div className='px-1 md:px-4 hover:bg-slate-800/50 cursor-pointer transition-all rounded-b-xl border-t py-2 md:py-5 border-slate-800 w-full'>
 
-
+        {post?.commentsCount ==0 && <p className='text-slate-500 text-xs md:text-base'>No comments yet. Be the first to comment!</p>}
         {post?.topComment && <CommentCard comment={post.topComment} />}
 
-        {post?.commentsCount > 1 ? (
+        {post?.commentsCount > 1 && (
             <Link to={`/post/${post?._id}`} className="hover:text-cyan-300 hover:translate-0.5 transition-all text-cyan-400 text-sm">View all {post?.commentsCount} comments</Link>
-        ) :
-            <p className='max-md:text-xs'>No comments yet</p>
-        }
+        )}
 
 
         {isCommenting &&

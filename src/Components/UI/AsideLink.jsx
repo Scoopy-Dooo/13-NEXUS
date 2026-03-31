@@ -1,9 +1,12 @@
 import { useContext } from 'react';
 import { NavLink } from 'react-router';
 import { UserContext } from '../../Contexts/UserContext';
-export default function AsideLink({ icon, text, color, iconOnly }) {
+export default function AsideLink({ icon, text, color, iconOnly, logout }) {
     const { userData } = useContext(UserContext)
-    return <NavLink to={"/" + (text == "profile" ? ("profile/" + userData?._id) : text)} className="lg:w-full ">
+
+
+
+    return <NavLink to={logout ? "" : "/" + (text == "profile" ? ("profile/" + userData?._id) : text)} className="lg:w-full ">
         {({ isActive }) => (
             <div className={`
                 ${isActive ?

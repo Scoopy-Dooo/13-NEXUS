@@ -6,13 +6,14 @@ export default async function sendPost(data, token) {
   if (data.image) formdata.append("image", data.image);
 
   try {
-    const response = await axios(`${import.meta.env.VITE_API_BASE_URL}/posts`, {
+    const {data} = await axios(`${import.meta.env.VITE_API_BASE_URL}/posts`, {
       headers: { Token: token },
       method: "POST",
       data: formdata,
     });
-    return response.data;
+    console.log("🚀 ~ sendPost ~ data:", data)
+    return data;
   } catch (error) {
-    throw error;
+    throw new  Error(error);
   }
 }

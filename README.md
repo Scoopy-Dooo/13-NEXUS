@@ -1,16 +1,83 @@
-# React + Vite
+<div align="center">
+  <img src="src/assets/logo2 cut.png" width="80" alt="NEXUS Logo" />
+  <h1>NEXUS</h1>
+  <p>A modern social networking platform built with React</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+  [![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit-indigo?style=for-the-badge)](https://sco-nexus.vercel.app/)
+  [![GitHub](https://img.shields.io/badge/GitHub-Repo-black?style=for-the-badge&logo=github)](https://github.com/Scoopy-Dooo/13-NEXUS)
+</div>
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## About
 
-## React Compiler
+NEXUS is a full-featured social media web app where users can post, comment, like, follow others, and manage their profiles — all in a sleek dark UI.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- Auth — register, login, protected routes
+- Posts — create, edit, delete, like, bookmark, image upload
+- Comments — add, edit, delete, like
+- Profile — view, edit, upload profile photo, follow/unfollow
+- Post Details — full post view with likes and comments list
+- Notifications — (coming soon)
+- Messaging — (coming soon)
+- Responsive — mobile bottom nav + desktop sidebar
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech Stack
+
+- **React 19** + **Vite**
+- **React Router v7**
+- **TanStack Query v5** — server state & caching
+- **React Hook Form** + **Zod** — form validation
+- **HeroUI** — component library
+- **Tailwind CSS v4**
+- **Axios**
+- **React Toastify**
+
+## Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Add your environment variables
+cp .env.example .env
+# Set VITE_API_BASE_URL in .env
+
+# Run dev server
+npm run dev
+```
+
+## Environment Variables
+
+```env
+VITE_API_BASE_URL=https://your-api-url.com/api
+```
+
+## Project Structure
+
+```
+src/
+├── Assets/
+├── Components/
+│   ├── Layouts/     # NavBar, Layout
+│   └── UI/          # ProfileImg, HomeHeader, CommentCard...
+├── Contexts/        # Auth & User context
+├── Pages/
+│   ├── Auth/        # Login, Register
+│   ├── Home/
+│   ├── Post/
+│   ├── Profile/
+│   ├── Notifications/
+│   ├── Chatting/
+│   ├── Settings/
+│   └── NotFound/
+└── Services/        # API calls
+```
+
+---
+
+<div align="center">
+  Made with ❤️ by <strong>Mohamed Saad</strong> aka <strong>Scoopy Doo</strong>
+</div>

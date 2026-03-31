@@ -6,7 +6,11 @@ export default function ProfileImg({ size, user }) {
 
     const { userData } = useContext(UserContext)
 
-    return <div className={`imagewrapper rounded-full ${size ? size : 'size-11'} overflow-hidden  border-3 border-slate-500 group-hover:border-indigo-600 transition-all`}>
-        <img src={user?.photo ?? userData?.photo ?? profileLogo} className=' object-cover rounded-full' alt="profile picture" />
+    const photo = user?.photo ?? userData?.photo;
+    const cacheBuster = userData?.photoUpdatedAt ?? '';
+    const src = photo ? `${photo}?t=${cacheBuster}` : profileLogo;
+
+    return <div className={`imagewrapper rounded-full  ${size ? size : 'size-11'}   overflow-hidden  border-3 border-slate-500 group-hover:border-indigo-600 transition-all`}>
+        <img src={src} className='object-cover size-full rounded-full' alt="profile picture" />
     </div>
 }

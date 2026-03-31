@@ -23,12 +23,6 @@ export default function Layout() {
             : pathname.startsWith('/post') ? 'Post'
                 : 'NEXUS');
 
-
-
-
-
-
-
     return <>
         <title>NEXUS | {pageTitle}</title>
         {token ? <>
