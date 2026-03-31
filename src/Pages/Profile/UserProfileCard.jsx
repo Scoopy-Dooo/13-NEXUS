@@ -90,7 +90,7 @@ export default function UserProfileCard({ profileData, isLoading, isMyProfile, p
                                         ? <div className="size-40 rounded-full flex items-center justify-center bg-slate-800"><Spinner /></div>
                                         : <Tooltip content="Edit Profile Picture">
                                             <div className="relative">
-                                                <ProfileImg size="size-40" user={profileData} />
+                                                <ProfileImg notLink size="size-40" user={profileData} />
                                                 <span className="absolute inset-0 rounded-full bg-black/40 opacity-0 group-hover/avatar:opacity-100 transition flex items-center justify-center text-white text-xl">
                                                     <FaPen />
                                                 </span>

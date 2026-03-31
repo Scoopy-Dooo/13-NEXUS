@@ -1,8 +1,9 @@
 import { useContext } from 'react';
 import profileLogo from "../../assets/sco logo.jpg";
 import { UserContext } from './../../Contexts/UserContext';
+import { Link } from 'react-router';
 
-export default function ProfileImg({ size, user }) {
+export default function ProfileImg({ size, user , notLink}) {
 
     const { userData } = useContext(UserContext)
 
@@ -10,7 +11,9 @@ export default function ProfileImg({ size, user }) {
     const cacheBuster = userData?.photoUpdatedAt ?? '';
     const src = photo ? `${photo}?t=${cacheBuster}` : profileLogo;
 
-    return <div className={`imagewrapper rounded-full  ${size ? size : 'size-11'}   overflow-hidden  border-3 border-slate-500 group-hover:border-indigo-600 transition-all`}>
-        <img src={src} className='object-cover size-full rounded-full' alt="profile picture" />
-    </div>
+    return <Link to={notLink ? "" : `/profile/${user?._id}`} className={`${size ? size : 'size-11'} size-fit overflow-hidden`}>
+        <div className={`imagewrapper rounded-full  ${size ? size : 'size-11'} border-3 border-slate-500 group-hover:border-indigo-600 transition-all`}>
+            <img src={src} className='object-cover size-full rounded-full' alt="profile picture" />
+        </div>
+    </Link>
 }

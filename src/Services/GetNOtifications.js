@@ -7,10 +7,11 @@ export async function GetNotes(token) {
       {
         headers: {
           "Content-Type": "application/json",
-          token: token,
+          Token: token,
         },
       },
     );
+    console.log("🚀 ~ GetNotes ~ data:", data)
     return await data;
   } catch (error) {
     throw new Error(error);

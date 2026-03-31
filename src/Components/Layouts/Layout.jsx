@@ -12,6 +12,12 @@ export default function Layout() {
     function goUp() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
+
+
+
+
+
     return <>
         <title>NEXUS </title>
         {token ? <>
