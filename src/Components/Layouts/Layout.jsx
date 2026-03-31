@@ -9,12 +9,9 @@ import NavBar from './NavBar';
 
 export default function Layout() {
     const { token } = useContext(AuthContext)
-
-
     function goUp() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-
     return <>
         <title>NEXUS </title>
         {token ? <>
